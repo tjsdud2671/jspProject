@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name ="viewport" content="width=device-width, initial-scale=1">
-  <title>test10.jsp</title>
+  <title>test11.jsp</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -49,8 +49,8 @@
 <body>
 <p><br/></p>
 <div class="container">
-	<h2>회원가입 연습(Response.sendRedirect)</h2>
-	<form name="myform" method="post" action="<%=request.getContextPath()%>/j1026/test10Ok">
+	<h2>회원가입 연습(RequestDispatcher)</h2>
+	<form name="myform" method="post" action="<%=request.getContextPath()%>/j1026/test11Ok">
 		<div class="cont">성명
 			<input type="text" name="name" class="form-control mb-3" autofocus/>
 		</div>
