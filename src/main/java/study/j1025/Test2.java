@@ -1,4 +1,4 @@
-package study.J1025;
+package study.j1025;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package study.J1025;
+package study.j1025;
 
 public class Test1 {
 	public static void main(String[] args) {

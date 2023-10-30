@@ -1,4 +1,4 @@
-package study.J1026;
+package study.j1026;
 
 import java.io.IOException;
 

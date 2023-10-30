@@ -1,4 +1,4 @@
-package study.J1026;
+package study.j1026;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/j1026/test12Ok")
-public class Test12Ok extends HttpServlet {
+@WebServlet("/j1026/test11Ok")
+public class Test11Ok extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -56,8 +56,7 @@ public class Test12Ok extends HttpServlet {
 			request.setAttribute("hobby", hobby);
 			request.setAttribute("job", job);
 			
-//			String viewPage = "/study/1026/test12Msg.jsp";
-			String viewPage = "/study/1026/test12Res.jsp";
+			String viewPage = "/study/1026/test11Res.jsp";
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 			dispatcher.forward(request, response);

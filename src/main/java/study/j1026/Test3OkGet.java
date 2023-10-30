@@ -1,4 +1,4 @@
-package study.J1026;
+package study.j1026;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Test3OkPost")
-public class Test3OkPost extends HttpServlet {
+import org.apache.jasper.tagplugins.jstl.core.Out;
+
+@WebServlet("/Test3OkGet")
+public class Test3OkGet extends HttpServlet {
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
@@ -29,8 +31,9 @@ public class Test3OkPost extends HttpServlet {
 		out.println("<p>성명 : "+name+"</p>");
 		out.println("<p>나이 : "+age+"</p>");
 		out.println("<p>flag : "+flag+"</p>");
-		// out.println("<p><a href='/javaProject/study/1026/test3.jsp'>돌아가기</a></p>");
+//		out.println("<p><a href='/javaProject/study/1026/test3.jsp'>돌아가기</a></p>");
 		out.println("<p><a href='"+request.getContextPath()+"/study/1026/test3.jsp'>돌아가기</a></p>");
+		//out.println("<p><a href='"+request.getContextPath()+"/Test2'>돌아가기</a></p>");
 	}
 
 }
