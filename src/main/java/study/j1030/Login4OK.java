@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/j1030/loginOK")
-public class LoginOK extends HttpServlet{
+@WebServlet("/j1030/login4OK")
+public class Login4OK extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = request.getParameter("mid")==null?"":request.getParameter("mid");
@@ -26,7 +26,7 @@ public class LoginOK extends HttpServlet{
 			mSw = "No";
 		}
 
-		response.sendRedirect(request.getContextPath()+"/study/1030/main.jsp?mid="+mid+"&mSw="+mSw);
+		response.sendRedirect(request.getContextPath()+"/study/1030/main4.jsp?mid="+mid+"&mSw="+mSw);
 	}
 
 }

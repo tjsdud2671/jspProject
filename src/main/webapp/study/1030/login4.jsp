@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name ="viewport" content="width=device-width, initial-scale=1">
-  <title>login.jsp</title>
+  <title>login4.jsp</title>
 	<jsp:include page="../../include/bs4.jsp"/>
 </head>
 <body>
 <p><br/></p>
 <div class="container">
-	<form name="loginform" method="post" action="${pageContext.request.contextPath}/j1030/loginOK">
+	<form name="loginform" method="post" action="${pageContext.request.contextPath}/j1030/login4OK">
 		<table class="table table-bordered">
 			<tr>
 				<th colspan="2" class="text-center"><h2>회원로그인</h2></th>
@@ -22,6 +22,10 @@
 			<tr>
 				<th>비밀번호</th>
 				<td><input type="password" name="pwd" id="pwd" value="1234" class="form-control" required/></td>
+			</tr>
+			<tr>
+				<th>닉네임</th>
+				<td><input type="text" name="nickName" id="nickName" value="관리자" class="form-control" required/></td>
 			</tr>
 			<tr>
 				<th colspan="2" class="text-center">

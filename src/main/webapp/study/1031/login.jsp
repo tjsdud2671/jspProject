@@ -10,7 +10,7 @@
 <body>
 <p><br/></p>
 <div class="container">
-	<form name="loginform" method="post" action="${pageContext.request.contextPath}/j1030/loginOK">
+	<form name="loginform" method="post" action="loginOK.jsp">
 		<table class="table table-bordered">
 			<tr>
 				<th colspan="2" class="text-center"><h2>회원로그인</h2></th>

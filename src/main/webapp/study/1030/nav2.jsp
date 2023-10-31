@@ -7,7 +7,7 @@
 	function logoutCheck(){
 		let ans = confirm("로그아웃 하시겠습니까?");
 		if(ans){
-			location.href="${pageContext.request.contextPath}/j1030/logout?mid={mid}";
+			location.href="${pageContext.request.contextPath}/j1030/logout?mid=${mid}";
 		}
 	}
 </script>
@@ -17,5 +17,5 @@
 	<a href="main.jsp?mid=${mid}&flag=guest" class="btn btn-outline-primary">Guest</a> |
 	<a href="main.jsp?mid=${mid}&flag=board" class="btn btn-outline-primary">Board</a> |
 	<a href="main.jsp?mid=${mid}&flag=pds" class="btn btn-outline-primary">Pds</a> | 
-	<a href="javascript:LogoutCheck()" class="btn btn-outline-warning">Logout</a> 
+	<a href="javascript:logoutCheck()" class="btn btn-outline-warning">Logout</a> 
 </div> 
