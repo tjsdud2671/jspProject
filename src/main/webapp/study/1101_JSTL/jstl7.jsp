@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -33,9 +34,41 @@
 		<fmt:formatNumber value="${1234.567}" pattern="#,##0.0"/><br/>
 		<hr/>
 		2.화폐단위<br/>
-		원화 : <fmt:formatNumber value="${won1}"/> 
+		원화 : <fmt:formatNumber value="${won1}" type="currency"/><br/>
+		US달러 : <fmt:formatNumber value="${won1}" type="currency" currencyCode="USD"/><br/>
+		<hr/>
+		
+		3.백분율<br/>
+		0.98765 : <fmt:formatNumber value="0.98765" type="percent"/><br/> 
+		<hr/>
+		
+		4.날짜<br/>
+		오늘날짜1 : <%=new Date() %>"/><br/>
+		<c:set var="today" value="<%=new Date() %>"/><br/>
+		오늘날짜2 : ${today} / <fmt:formatDate value="${today}"/><br/>
+		오늘날짜3 : <fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/><br/>
+		오늘시간4 : <fmt:formatDate value="${today}" pattern="hh:mm:dd"/><br/>
+		<hr/>
+		
+		
+		5.국가별설정(로케일)<br/>
+		톰캣 서버의 기본 로케일 : <%=response.getLocale() %><br/>
+		톰캣 서버의 기본 로케일 변경 (USA): <fmt:setLocale value="en_US" />
+																	원화 : <fmt:formatNumber value="${won1}" type="currency"/><br/>
+		<hr/>
+		
+		
+		6.URL이동 : location.href = ''; => redirect : core라이브러리에 존재함<br/>
+		<%-- <c:redirect url="jstl6.jsp"/> --%>
+		
+		7.import : core라이브러리에 존재함<br/>
+		<c:import url="/include/bs4.jsp"/>
+		
+		
+		
+		
 	</div>
 </div>
 <p><br/></p>
-</body>
+</body>		
 </html>
