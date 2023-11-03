@@ -1,8 +1,5 @@
 package study.database;
 
-import java.security.Timestamp;
-import java.sql.Date;
-
 public class LoginVO {
 	private int idx;
 	private String mid;
@@ -11,7 +8,6 @@ public class LoginVO {
 	private int point;
 	private String lastDate;
 	private int todayCount;
-	
 	
 	public int getIdx() {
 		return idx;
@@ -61,6 +57,4 @@ public class LoginVO {
 		return "LoginVO [idx=" + idx + ", mid=" + mid + ", pwd=" + pwd + ", name=" + name + ", point=" + point
 				+ ", lastDate=" + lastDate + ", todayCount=" + todayCount + "]";
 	}
-	
-	
 }
