@@ -13,6 +13,6 @@ create table guest (
 
 desc guest;
 
-insert into guest values (default,'관리자','방명록 서비스를 시작합니다.','tjsdud2671@naver.com','abc.tistory.com',default,'192.168.50.69');
+insert into guest values (default,'관리자','방명록 서비스를 시작합니다.','cjsk1126@naver.com','cjsk1126.tistory.com',default,'192.168.50.20');
 
 select * from guest;
