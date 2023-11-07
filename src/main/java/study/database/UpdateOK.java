@@ -35,11 +35,10 @@ public class UpdateOK extends HttpServlet {
 		
 		vo = new LoginVO();
 		vo.setMid(mid);
-		//vo.setPwd(pwd);
+		// vo.setPwd(pwd);
 		vo.setName(name);
-		System.out.println("mid : " + mid);
-		System.out.println("name : " + name);
-		int res = dao.setUpdateOK(vo);
+		
+		int res = dao.setUpdateOk(vo);
 		
 		if(res != 0) {
 			HttpSession session = request.getSession();

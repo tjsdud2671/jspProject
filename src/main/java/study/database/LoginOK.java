@@ -40,8 +40,7 @@ public class LoginOK extends HttpServlet {
 			Date today = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String strToday = sdf.format(today);
-			//System.out.println("strToday : " + strToday);
-			
+			// System.out.println("strToday : " + strToday);
 			
 			if(strToday.equals(vo.getLastDate().substring(0,10))) {
 				// 오늘 다시 방문한 경우
@@ -49,7 +48,7 @@ public class LoginOK extends HttpServlet {
 				if(vo.getTodayCount() <= 5) vo.setPoint(vo.getPoint()+10);
 			}
 			else {
-				// 오늘 처음 방문한 경우
+				// 오늘 처음 방문한 경우가
 				vo.setTodayCount(1);
 				vo.setPoint(vo.getPoint()+10);
 			}

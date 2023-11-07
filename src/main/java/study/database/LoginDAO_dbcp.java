@@ -7,16 +7,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class LoginDAO {
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class LoginDAO_dbcp {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	private ResultSet rs = null;
+	
+	private DataSource dataFactory;
 
 	String sql = "";
 	
 	private LoginVO vo = null;
 
 	// DAO객체의 생성과 동시에 DB 접속처리 한다.
+	/*
 	public LoginDAO() {
 		String url = "jdbc:mysql://localhost:3306/javaProject";
 		String user = "root";
@@ -29,6 +36,18 @@ public class LoginDAO {
 			System.out.println("드라이버 검색 실패~~~" + e.getMessage());
 		} catch (SQLException e) {
 			System.out.println("Database 연동 실패~~");
+		}
+	}
+	*/
+	
+	// DBCP사용...
+	public LoginDAO_dbcp() {
+		try {
+			Context ctx = new InitialContext();
+			Context envContext = (Context) ctx.lookup("java:/comp/env");
+			dataFactory = (DataSource) envContext.lookup("dbcp_mysql");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
@@ -66,6 +85,9 @@ public class LoginDAO {
 	public LoginVO getLoginCheck(String mid, String pwd) {
 		vo = new LoginVO();
 		try {
+			
+			conn = dataFactory.getConnection();
+			
 			sql = "select * from login where mid=? and pwd=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);

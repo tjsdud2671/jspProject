@@ -10,15 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@SuppressWarnings("serial")
 @WebServlet("/database/deleteOK")
-public class DeleteOK extends HttpServlet{
+public class DeleteOK extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String mid = (String) session.getAttribute("sMid");
 		
 		LoginDAO dao = new LoginDAO();
-		int res = dao.setDeleteOK(mid);
+		
+		int res = dao.setDeleteOk(mid);
 		
 		PrintWriter out = response.getWriter();
 		if(res != 0) {
@@ -31,10 +33,9 @@ public class DeleteOK extends HttpServlet{
 		}
 		else {
 			out.println("<script>");
-			out.println("alert('탈퇴실패');");
-			out.println("location.href='"+request.getContextPath()+"/study/database/join.jsp';");
-			out.println("</script>");
+			out.println("alert('회원 탈퇴 실패~~~');");
+			out.println("location.href='"+request.getContextPath()+"/study/database/memberMain.jsp';");
+			out.println("</script>");			
 		}
 	}
-
 }
