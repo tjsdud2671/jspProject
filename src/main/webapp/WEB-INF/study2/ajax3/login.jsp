@@ -28,15 +28,48 @@
       text-align: center;
     }
   </style>
+  <script>
+    'use strict';
+    
+  	function loginCheck() {
+  		//let mid = document.getElementById("mid").value;
+  		let mid = $("#mid").val();
+  		let pwd = $("#pwd").val();
+  		let idSave = document.getElementById('idSave').checked ? "on" : "off";
+  		//let idSave = $('#idSave').is(':checked') ? "on" : "off";
+  		
+  		let query = {
+  				mid : mid,
+  				pwd : pwd,
+  				idSave : idSave
+  		}
+  		
+  		$.ajax({
+  			url  : "loginOk.alo",
+  			type : "post",
+  			data : query,
+  			success:function(res) {
+  				alert(res);
+  				if(res.indexOf(mid) == -1) location.href = "login.alo";
+  				else location.href = "memberMain.alo";
+  			},
+  			error : function() {
+  				alert("전송오류!!");
+  			}
+  		});
+  	}
+  </script>
 </head>
 <body>
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-  <form name="loginForm" method="post" action="loginOk.lo" >
+  <%-- <form name="loginForm" method="post" action="${ctp}/database~~~@@@1111/loginOk.lo" > --%>
+  <!-- <form name="loginForm" method="post" action="loginOk.alo" > -->
+  <form name="loginForm">
   	<table class="table table-bordered">
   	  <tr>
-  	    <td colspan="2" class="text-center"><h2>회원 로그인</h2></td>
+  	    <td colspan="2" class="text-center"><h2>회원 로그인(AJax사용)</h2></td>
   	  </tr>
   	  <tr>
   	    <th>아이디</th>
@@ -48,10 +81,10 @@
   	  </tr>
   	  <tr>
   	    <td colspan="2" class="text-center">
-  	      <input type="submit" value="로그인" class="btn btn-success mr-2" />
+  	      <input type="button" value="로그인" onclick="loginCheck()" class="btn btn-success mr-2" />
   	      <input type="reset" value="다시입력" class="btn btn-warning mr-2" />
-  	      <input type="button" value="회원가입" onclick="location.href='join.lo';" class="btn btn-info mr-3" />
-  	      <input type="checkbox" name="idSave" checked /> 아이디저장
+  	      <input type="button" value="회원가입" onclick="location.href='join.alo';" class="btn btn-info mr-3" />
+  	      <input type="checkbox" name="idSave" id="idSave" checked /> 아이디저장
   	    </td>
   	  </tr>
   	</table>

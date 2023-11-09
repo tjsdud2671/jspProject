@@ -26,21 +26,94 @@
     	let mid = document.getElementById("mid").value;
     	if(mid.trim() == "") {
     		alert("검색할 아이디를 입력하세요");
+    		document.getElementById("mid").focus();
+    		return;
     	}
-    	else {
-    		location.href = 'memberSearch.lo?mid='+mid;
-    	}
+    	//location.href = 'memberSearch.lo?mid='+mid;
+    	
+    	$.ajax({
+    		url : "memberSearch.alo",
+    		type : "post",
+    		data : {mid:mid},
+    		success:function(res) {
+    			demo.innerHTML = res;
+    		},
+    		error  :function() {
+    			alert("전송 실패");
+    		}
+    	});
+    	
     }
     
     function logoutCheck() {
     	let ans = confirm("로그아웃 하시겠습니까?");
-    	if(ans) location.href = "logout.lo";
+    	if(!ans) return false;
+    	
+    	$.ajax({
+    		url  : "logout.alo",
+    		type : "post",
+    		success:function(res) {
+    			alert('${sMid}' + "님 로그아웃 되셨습니다.");
+    			location.href = 'login.alo';
+    		}
+    	});
     }
     
     // 회원 탈퇴처리
     function deleteCheck() {
     	let ans = confirm("정말 회원 탈퇴 하시겠습니까?");
-    	if(ans) location.href = "deleteOk.lo";
+    	if(!ans) return;
+    	
+    	let mid = "${sMid}";
+    	
+    	$.ajax({
+    		url : "deleteOk.alo",
+    		type : "post",
+    		data : {mid : mid},
+    		success : function(res) {
+					if(res == "1") {
+	    			alert(mid + "님이 회원 탈퇴되었습니다.");
+						location.href = "login.alo";
+					}
+					else {
+						alert("회원 탈퇴 실패");
+					}
+				},
+				error : function() {
+						alert("전송 오류");
+				}
+    	});
+    }
+    
+    // 전체조회
+    function listCheck() {
+    	$.ajax({
+    		url  : "memberList.alo",
+    		type : "post",
+    		success:function(res) {
+    			let js = JSON.parse(res);
+    			console.log("js", js);
+    			
+    			let str = '<table class="table table-hover">';
+    			str += '<tr class="table-dark text-bark"><th>번호</th><th>아이디</th><th>성명</th><th>최종접속일</th><th>오늘방문카운트</th></tr>';
+    			for(let j of js) {
+    				str += '<tr>';
+    				str += '<td>'+j.idx+'</td>';
+    				str += '<td>'+j.mid+'</td>';
+    				str += '<td>'+j.name+'</td>';
+    				str += '<td>'+j.lastDate+'</td>';
+    				str += '<td>'+j.todayCount+'</td>';
+    				str += '</tr>';
+    			}
+    			str += '<tr><td colspan="5" class="m-0 p-0"></td></tr>';
+    			str += '</table>';
+    			
+    			$("#demo").html(str);
+    		},
+    		error : function() {
+    			alert("전송실패~~");
+    		}
+    	});
     }
   </script>
 </head>
@@ -60,8 +133,8 @@
   <hr/>
   <div class="row" style="font-size:10px">
     <div class="col"><a href="javascript:searchCheck()" class="btn btn-success">개별조회</a></div>
-    <div class="col"><a href="memberList.lo" class="btn btn-primary">전체조회</a></div>
-    <div class="col"><a href="update.lo" class="btn btn-info">정보수정</a></div>
+    <div class="col"><a href="javascript:listCheck()" class="btn btn-primary">전체조회</a></div>
+    <div class="col"><a href="update.alo" class="btn btn-info">정보수정</a></div>
     <div class="col"><a href="javascript:logoutCheck()" class="btn btn-warning">로그아웃</a></div>
     <div class="col"><a href="javascript:deleteCheck()" class="btn btn-danger">회원탈퇴</a></div>
   </div>

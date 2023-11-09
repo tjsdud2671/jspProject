@@ -1,4 +1,4 @@
-package study2.login;
+package study2.ajax3;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.jdbc.Security;
+
+import common.SecurityUtil;
+
 public class LoginOkCommand implements LoginInterface {
 
 	@Override
@@ -18,6 +22,9 @@ public class LoginOkCommand implements LoginInterface {
 		String pwd = request.getParameter("pwd")==null ? "" : request.getParameter("pwd");
 		
 		LoginDAO dao = new LoginDAO();
+		
+		SecurityUtil security = new SecurityUtil();
+		pwd = security.encryptSHA256(pwd);
 		
 		LoginVO vo = dao.getLoginCheck(mid, pwd);
 		
@@ -68,13 +75,11 @@ public class LoginOkCommand implements LoginInterface {
 			}
 			response.addCookie(cookieMid);
 			
-			// 메세지 처리
-			request.setAttribute("msg", vo.getName()+"님 로그인 되었습니다.");
-			request.setAttribute("url", "memberMain.lo");
+			
+			response.getWriter().write(mid+"님 로그인 되었습니다.");
 		}
 		else {
-			request.setAttribute("msg", "로그인 실패~~~");
-			request.setAttribute("url", "login.lo");
+			response.getWriter().write("로그인 실패~~");
 		}
 	}
 

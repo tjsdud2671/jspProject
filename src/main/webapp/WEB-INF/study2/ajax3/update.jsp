@@ -14,14 +14,38 @@
     function fCheck() {
     	let pwd = document.getElementById("pwd").value;
     	let name = document.getElementById("name").value;
+    	let mid = "${sMid}";
     	
     	if(pwd.trim()=="" || name.trim()=="") {
     		alert("수정할 정보를 입력하세요");
     		document.getElementById("pwd").focus();
+    		return false;
     	}
-    	else {
-    		myform.submit();
+    	
+    	let query = {
+    		mid : mid,
+    		pwd : pwd,
+    		name : name
     	}
+    	
+    	$.ajax({
+    		url : "updateOk.alo",
+    		type : "post",
+    		data : query,
+    		success : function(res) {
+    			if(res=="1") {
+    				alert("정보가 수정되었습니다.");
+    				location.href="memberMain.alo";
+    			}
+    			else {
+    				alert("정보수정실패.");
+    				//location.href="update.alo?mid="+mid;
+    			}
+    		},
+    		error : function(){
+    			alert("전송실패");
+    		}
+    	});
     }
   </script>
   <style>

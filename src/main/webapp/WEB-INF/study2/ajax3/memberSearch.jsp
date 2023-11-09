@@ -16,7 +16,7 @@
   </style>
 </head>
 <body>
- <jsp:include page="/include/header.jsp" />
+<jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container text-center">
   <h2>개별 회원 조회</h2>
@@ -55,6 +55,6 @@
   </table>
 </div>
 <p><br/></p>
- <jsp:include page="/include/footer.jsp" />
+<jsp:include page="/include/footer.jsp" />
 </body>
 </html>

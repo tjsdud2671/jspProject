@@ -11,6 +11,36 @@
   <script>
     'use strict';
     
+    function joinCheck() {
+    	let mid = $("#mid").val().trim();
+    	let pwd = $("#pwd").val().trim();
+    	let name = $("#name").val().trim();
+    	
+    	if(mid == "" || pwd == "" || name == "") {
+    		alert("아이디/비밀번호/성명 은 필수 입력입니다.");
+    		$("#mid").focus();
+    		return false;
+    	}
+    	
+    	let query = {
+    			mid : mid,
+    			pwd : pwd,
+    			name: name
+    	}
+    	
+    	$.ajax({
+    		url  : "joinOk.alo",
+    		type : "post",
+    		data : query,
+    		success:function(res) {
+  				alert(res);
+    			if(res.indexOf(mid) != -1) location.href = 'login.alo';
+    		},
+    		error : function() {
+    			alert("전송 오류");
+    		}
+    	});
+    }
   </script>
   <style>
     th {
@@ -20,9 +50,10 @@
   </style>
 </head>
 <body>
+<jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container text-center">
-<form name="myform" method="post" action="joinOk.lo">
+<form name="myform">
   <h2>회 원 가 입</h2>
   <table class="table table-bordered">
     <tr>
@@ -39,14 +70,15 @@
     </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="회원가입" class="btn btn-success" />
-        <input type="reset" value="다시입력" class="btn btn-success" />
-        <input type="button" value="돌아가기" onclick="location.href='login.lo';" class="btn btn-primary" />
+        <input type="button" value="회원가입" onclick="joinCheck()" class="btn btn-success" />
+        <input type="reset" value="다시입력" class="btn btn-warning" />
+        <input type="button" value="돌아가기" onclick="location.href='login.alo';" class="btn btn-primary" />
       </td>
     </tr>
   </table>
 </form>
 </div>
 <p><br/></p>
+<jsp:include page="/include/footer.jsp" />
 </body>
 </html>

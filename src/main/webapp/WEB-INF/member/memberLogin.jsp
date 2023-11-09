@@ -3,7 +3,7 @@
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <%
 	// 로그인창에 아이디 체크 유무에 대한 처리
-	// 쿠키를 검색해서 cMid가 있을때 가져와서 아이디입력창에 뿌릴수 있게 한다.
+	// 쿠키를 검색해서 cMid가 있을때 가져와서 아이디입력창에 뿌릴 수 있게 한다.
 	Cookie[] cookies = request.getCookies();
 
 	if(cookies != null) {
@@ -33,7 +33,7 @@
 <jsp:include page="/include/header.jsp" />
 <p><br/></p>
 <div class="container">
-  <form name="loginForm" method="post" action="loginOk.lo" >
+  <form name="loginForm" method="post" action="memberloginOK.mem" >
   	<table class="table table-bordered">
   	  <tr>
   	    <td colspan="2" class="text-center"><h2>회원 로그인</h2></td>
@@ -50,8 +50,14 @@
   	    <td colspan="2" class="text-center">
   	      <input type="submit" value="로그인" class="btn btn-success mr-2" />
   	      <input type="reset" value="다시입력" class="btn btn-warning mr-2" />
-  	      <input type="button" value="회원가입" onclick="location.href='join.lo';" class="btn btn-info mr-3" />
-  	      <input type="checkbox" name="idSave" checked /> 아이디저장
+  	      <input type="button" value="회원가입" onclick="location.href='join.jsp';" class="btn btn-info" />
+  	    </td>
+  	  </tr>
+  	  <tr>
+  	    <td colspan="2" class="text-center">
+  	      <input type="checkbox" name="idSave" checked /> 아이디저장 &nbsp;&nbsp;&nbsp;
+					[<a href="#">아이디찾기</a>] /
+					[<a href="#">비밀번호찾기</a>]
   	    </td>
   	  </tr>
   	</table>
