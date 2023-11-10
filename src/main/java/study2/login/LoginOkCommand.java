@@ -40,7 +40,7 @@ public class LoginOkCommand implements LoginInterface {
 				if(vo.getTodayCount() <= 5) vo.setPoint(vo.getPoint()+10);
 			}
 			else {
-				// 오늘 처음 방문한 경우가
+				// 오늘 처음 방문한 경우
 				vo.setTodayCount(1);
 				vo.setPoint(vo.getPoint()+10);
 			}
