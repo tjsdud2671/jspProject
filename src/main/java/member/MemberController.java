@@ -60,7 +60,7 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-		else if(level > 4) {	// 비회원인경우(세션이 끊어진경우) 홈으로 보낸다.
+		else if(level > 4) {	// 비회원인경우(세션이 끈어진경우) 홈으로 보낸다.
 			request.getRequestDispatcher("/").forward(request, response);
 		}
 		else if(com.equals("/memberLogout")) {
@@ -77,7 +77,7 @@ public class MemberController extends HttpServlet {
 			viewPage += "/memberPwdCheck.jsp";
 		}
 		else if(com.equals("/memberPwdCheckOk")) {
-			command = new MemberPwdCheckOkCommand();
+			command = new memberPwdCheckOkCommand();
 			command.execute(request, response);
 			viewPage = "/include/message.jsp";
 		}
@@ -100,6 +100,22 @@ public class MemberController extends HttpServlet {
 			command = new memberPwdChangeOkCommand();
 			command.execute(request, response);
 			return;
+		}
+		else if(com.equals("/memberDelelteCheck")) {
+			command = new MemberDelelteCheckCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("/memberDelelteOk")) {
+			command = new MemberDelelteOkCommand();
+			command.execute(request, response);
+			return;
+		}
+		
+		else if(com.equals("/mList")) {
+			command = new MListCommand();
+			command.execute(request, response);
+			viewPage += "/mList.jsp";
 		}
 		
 		request.getRequestDispatcher(viewPage).forward(request, response);

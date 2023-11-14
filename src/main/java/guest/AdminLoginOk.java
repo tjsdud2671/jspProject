@@ -25,13 +25,13 @@ public class AdminLoginOk extends HttpServlet {
 			session.setAttribute("sAdmin", "adminOk");
 			
 			out.println("<script>");
-			out.println("alert('관리자 인증 완료');");
+			out.println("alert('관리자 인증 OK!!');");
 			out.println("location.href='"+request.getContextPath()+"/GuestList';");
 			out.println("</script>");
 		}
 		else {
 			out.println("<script>");
-			out.println("alert('관리자 인증 실패');");
+			out.println("alert('관리자 인증 실패~~');");
 			out.println("location.href='"+request.getContextPath()+"/guest/adminLogin.jsp';");
 			out.println("</script>");
 		}

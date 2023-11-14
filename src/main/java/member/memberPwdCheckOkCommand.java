@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import common.SecurityUtil;
 
-public class MemberPwdCheckOkCommand implements MemberInterface {
+public class memberPwdCheckOkCommand implements MemberInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class MemberPwdCheckOkCommand implements MemberInterface {
 			request.setAttribute("url", "memberUpdateForm.mem?mid="+mid);
 		}
 		else {
-			request.setAttribute("msg", "비밀번호가 틀립니다. 확인하세요.");
+			request.setAttribute("msg", "비밀버호가 틀립니다. 확인하세요.");
 			request.setAttribute("url", "memberMain.mem");
 		}
 	}

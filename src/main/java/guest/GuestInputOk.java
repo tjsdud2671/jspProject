@@ -24,6 +24,7 @@ public class GuestInputOk extends HttpServlet {
 		name = name.replace(">", "&gt;");
 		
 		GuestVO vo = new GuestVO();
+		
 		vo.setName(name);
 		vo.setEmail(email);
 		vo.setHomePage(homePage);
@@ -39,6 +40,7 @@ public class GuestInputOk extends HttpServlet {
     	out.println("<script>");
     	out.println("alert('방명록에 글이 등록되었습니다.');");
     	out.println("location.href='"+request.getContextPath()+"/GuestList';");
+//    	out.println("location.href='"+request.getContextPath()+"/guest/guestList.jsp';");
     	out.println("</script>");
 		}
 		else {

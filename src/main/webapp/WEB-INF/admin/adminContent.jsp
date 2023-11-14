@@ -16,7 +16,7 @@
 	<hr/>
 	<p>방명록 새 글 : </p>
 	<p>게시글 새 글 : </p>
-	<p>신규 둥록 회원 새 글 : </p>
+	<p>신규 둥록 회원 : <a href="adminMemberList.ad?levle=1">${mCount}</a>명</p>
 </div>
 <p><br/></p>
 </body>
