@@ -19,6 +19,7 @@
   <script>
     'use strict';
     
+    // 좋아요 조회수 증가(중복불허....숙제...)
     function goodCheck() {
     	$.ajax({
     		url  : "boardGoodCheck.bo",
@@ -27,6 +28,44 @@
     		success:function(res) {
     			if(res == "0") alert('이미 좋아요 버튼을 클릭하셨습니다.');
     			else location.reload();
+    		},
+    		error : function() {
+    			alert("전송 오류!!");
+    		}
+    	});
+    }
+    
+    //  아래 좋아요수 증가(+1)과 감소(-1)은 같은 루틴의 반복으로 통합처리했음
+    // 좋아요 조회수 증가(중복허용)
+    function goodCheckPlus() {
+    	$.ajax({
+    		//url  : "boardGoodCheckPlus.bo",
+    		url  : "boardGoodCheckPlusMinus.bo",
+    		type : "post",
+    		data : {
+    			idx : ${vo.idx},
+    			goodCnt : +1
+    		},
+    		success:function() {
+    			location.reload();
+    		},
+    		error : function() {
+    			alert("전송 오류!!");
+    		}
+    	});
+    }
+    
+    // 좋아요 조회수 감소(중복허용)
+    function goodCheckMinus() {
+    	$.ajax({
+    		//url  : "boardGoodCheckMinus.bo",
+    		url  : "boardGoodCheckPlusMinus.bo",
+    		type : "post",
+    		data : {idx : ${vo.idx},
+    			goodCnt : -1	
+    		},
+    		success:function() {
+    			location.reload();
     		},
     		error : function() {
     			alert("전송 오류!!");
@@ -77,7 +116,7 @@
         <c:if test="${!empty vo.homePage && (fn:indexOf(vo.homePage,'http://') != -1 || fn:indexOf(vo.homePage,'https://') != -1) && fn:length(vo.homePage) > 10}"><a href="${vo.homePage}" target="_blank">${vo.homePage}</a></c:if>
       </td>
       <th>좋아요</th>
-      <td><font color="red"><a href="javascript:goodCheck()">❤</a></font>(${vo.good})</td>
+      <td><font color="red"><a href="javascript:goodCheck()">❤</a></font>(${vo.good}) / <a href="javascript:goodCheckPlus()">👍</a><a href="javascript:goodCheckMinus()">👎</a></td>
     </tr>
     <tr>
       <th>글내용</th>
@@ -85,7 +124,8 @@
     </tr>
     <tr>
       <td colspan="4" class="text-center">
-        <input type="button" value="돌아가기" onclick="location.href='boardList.bo?pag=${pag}&pageSize=${pageSize}';" class="btn btn-warning"/> &nbsp;
+        <c:if test="${flag != 'search'}"><input type="button" value="돌아가기" onclick="location.href='boardList.bo?pag=${pag}&pageSize=${pageSize}';" class="btn btn-warning"/> &nbsp;</c:if>
+        <c:if test="${flag == 'search'}"><input type="button" value="돌아가기" onclick="location.href='boardSearch.bo?pag=${pag}&pageSize=${pageSize}&search=${search}&searchString=${searchString}';" class="btn btn-warning"/> &nbsp;</c:if>
         <c:if test="${sMid == vo.mid || sLevel == 0}">
         	<input type="button" value="수정하기" onclick="location.href='boardUpdate.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}';" class="btn btn-info"/> &nbsp;
         	<input type="button" value="삭제하기" onclick="boardDelete()" class="btn btn-danger"/>
@@ -93,6 +133,20 @@
       </td>
     </tr>
   </table>
+  <!-- 이전글/다음글 처리 -->
+  <table class="table table-borderless">
+    <tr>
+      <td>
+      	<c:if test="${!empty nextVo.title }">
+        <a href="boardContent.bo?idx=${nextVo.idx}&pag=${pag}&pageSize=${pageSize}">다음글 : ${nextVo.title}</a><br/>
+        </c:if>
+      	<c:if test="${!empty preVo.title }">
+        <a href="boardContent.bo?idx=${preVo.idx}&pag=${pag}&pageSize=${pageSize}">이전글 : ${preVo.title}</a><br/>
+        </c:if>
+      </td>
+    </tr>
+  </table>
+  
 </div>
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />

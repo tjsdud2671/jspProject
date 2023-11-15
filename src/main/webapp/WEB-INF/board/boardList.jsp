@@ -45,15 +45,19 @@
       <th>글제목</th>
       <th>글쓴이</th>
       <th>글쓴날짜</th>
-      <th>조회수</th>
+      <th>조회수(좋아요)</th>
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
         <td>${curScrStartNo}</td>
-        <td class="text-left"><a href="boardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a></td>
+        <td class="text-left">
+          <a href="boardContent.bo?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}">${vo.title}</a>
+          <c:if test="${vo.hour_diff <= 24}"><img src="${ctp}/images/new.gif"/></c:if>
+        </td>
         <td>${vo.nickName}</td>
+        <!-- new.gif가 표시된 글은 시간만 표시시켜주고, 그렇지 않은 자료는 일자만 표시 -->
         <td>${fn:substring(vo.wDate,0,16)}</td>
-        <td>${vo.readNum}</td>
+        <td>${vo.readNum}(${vo.good})</td>
       </tr>
       <tr><td colspan="5" class="m-0 p-0"></td></tr>
       <c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>
@@ -75,6 +79,24 @@
   </ul>
 </div>
 <!-- 블록페이지 끝 -->
+<!-- 검색기 처리  -->
+<br/>
+<div class="container text-center">
+	<form name="searchForm" method="post" action="boardSearch.bo">
+		<b>검색 : </b>
+		<select name="search" id="search">
+			<option value="title" selected>글제목</option>
+			<option value="nickName">글쓴이</option>
+			<option value="content">글내용</option>
+		</select>
+		<input type="text" name="searchString" id="searchString"/>
+		<input type="submit" value="검색" class="btn btn-secondary btn-sm"/>
+		<input type="hidden" name="pag" value="${pag}"/>
+		<input type="hidden" name="pageSize" value="${pageSize}"/>
+	</form>
+
+</div>
+
 <p><br/></p>
 <jsp:include page="/include/footer.jsp" />
 </body>
