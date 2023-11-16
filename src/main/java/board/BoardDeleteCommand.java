@@ -10,7 +10,7 @@ public class BoardDeleteCommand implements BoardInterface {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int idx = request.getParameter("idx") == null ? 0 : Integer.parseInt(request.getParameter("idx"));
+		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		
 		BoardDAO dao = new BoardDAO();
 		
@@ -21,10 +21,9 @@ public class BoardDeleteCommand implements BoardInterface {
 			request.setAttribute("url", "boardList.bo");
 		}
 		else {
-			request.setAttribute("msg", "게시글 삭제 실패");
+			request.setAttribute("msg", "게시글 삭제 실패~~");
 			request.setAttribute("url", "boardContent.bo?idx="+idx);
 		}
-	
 	}
 
 }

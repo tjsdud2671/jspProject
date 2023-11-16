@@ -10,14 +10,15 @@ import javax.servlet.http.HttpSession;
 
 public class BoardContentCommand implements BoardInterface {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int idx = request.getParameter("idx")==null ? 0 : Integer.parseInt(request.getParameter("idx"));
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
 		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
-		String flag = request.getParameter("flag") == null ? "" : request.getParameter("flag");
-		String search = request.getParameter("search") == null ? "" :request.getParameter("search");
-		String searchString = request.getParameter("searchString") == null ? "" :request.getParameter("searchString");
+		String flag = request.getParameter("flag")==null ? "" : request.getParameter("flag");
+		String search = request.getParameter("search")==null ? "" : request.getParameter("search");
+		String searchString = request.getParameter("searchString")==null ? "" : request.getParameter("searchString");
 		
 		BoardDAO dao = new BoardDAO();
 		
@@ -43,11 +44,15 @@ public class BoardContentCommand implements BoardInterface {
 		request.setAttribute("search", search);
 		request.setAttribute("searchString", searchString);
 		
-		//이전글, 다음글 처리
-		BoardVO preVo = dao.getPreNexSearch(idx,"preVo");
-		BoardVO nextVo = dao.getPreNexSearch(idx,"nextVo");
+		// 이전글 / 다음글 처리
+		BoardVO preVo = dao.getPreNexSearch(idx, "preVo");
+		BoardVO nextVo = dao.getPreNexSearch(idx, "nextVo");
 		request.setAttribute("preVo", preVo);
 		request.setAttribute("nextVo", nextVo);
+		
+		// 댓글 처리
+		ArrayList<BoardReplyVO> replyVos = dao.getBoardReply(idx);
+		request.setAttribute("replyVos", replyVos);
 	}
 
 }

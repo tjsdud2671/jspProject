@@ -33,7 +33,16 @@ public class StudyController extends HttpServlet {
 			viewPage += "/uuId/uuIdForm.jsp";
 			
 		}
+		else if(com.equals("/fileUpload1")) {
+			viewPage += "/pdstest/fileUpload1.jsp";
+		}
 
+		else if(com.equals("/fileUpload1Ok")) {
+			command = new FileUpload1OkCommand();
+			command.execute(request, response);
+			viewPage = "/include/message.jsp";
+			
+		}
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
 }

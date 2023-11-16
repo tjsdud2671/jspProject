@@ -60,6 +60,11 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/member/adminMemberInfor.jsp";
 		}
+//		else if(com.equals("/complaintInput")) {
+//			command = new ComplaintInputCommand();
+//			command.execute(request, response);
+//			viewPage += "/.jsp";
+//		}
 		
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
