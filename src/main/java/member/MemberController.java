@@ -21,7 +21,7 @@ public class MemberController extends HttpServlet {
 		com = com.substring(com.lastIndexOf("/"),com.lastIndexOf("."));
 		
 		HttpSession session = request.getSession();
-		int level = session.getAttribute("sLevel")==null ? 99 : (int) session.getAttribute("sLevel");
+		int level = session.getAttribute("sLevel")==null ? 999 : (int) session.getAttribute("sLevel");
 		
 		
 		if(com.equals("/memberJoin")) {
@@ -111,11 +111,20 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			return;
 		}
-		
 		else if(com.equals("/mList")) {
 			command = new MListCommand();
 			command.execute(request, response);
 			viewPage += "/mList.jsp";
+		}
+		else if(com.equals("/mInfor")) {
+			command = new MInforCommand();
+			command.execute(request, response);
+			viewPage += "/mInfor.jsp";
+		}
+		else if(com.equals("/memberMessageInput")) {
+			command = new MemberMessageInputCommand();
+			command.execute(request, response);
+			return;
 		}
 		
 		request.getRequestDispatcher(viewPage).forward(request, response);

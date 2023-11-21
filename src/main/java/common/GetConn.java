@@ -2,8 +2,6 @@ package common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetConn {
@@ -14,6 +12,7 @@ public class GetConn {
 	private String user = "root";
 	private String password = "1234";
 	
+	@SuppressWarnings("unused")
 	private static final GetConn instance = new GetConn();
 	
 	private GetConn() {
@@ -32,7 +31,7 @@ public class GetConn {
 		return conn;
 	}
 	
-	public static GetConn getInstance() { //외부에서 이걸 부르면 connection객체에 연결되는거임 pc->DB로 갈 수 있게 하는 게 connection임
-		return instance;
-	}
+//	public static GetConn getInstance() {
+//		return instance;
+//	}
 }

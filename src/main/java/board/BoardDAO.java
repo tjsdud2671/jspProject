@@ -390,11 +390,12 @@ public class BoardDAO {
 		}
 		return res;
 	}
-	// 댓글 삭제
+
+	// 댓글 삭제처리
 	public int setBoardReplyDeleteOk(int idx) {
 		int res = 0;
 		try {
-			sql ="delete from boardReply where idx = ?";
+			sql = "delete from boardReply where idx = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, idx);
 			res = pstmt.executeUpdate();

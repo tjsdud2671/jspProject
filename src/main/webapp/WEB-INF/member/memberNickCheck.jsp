@@ -11,7 +11,7 @@
   <script>
     'use strict';
     
-    // 사용가능한 아이디를 부모창으로 전송후 창닫기
+    // 사용가능한 아이드를 부모창으로 전송후 창닫기
     function sendCheck() {
     	opener.window.document.myform.nickName.value = '${nickName}';
     	opener.window.document.myform.name.focus();

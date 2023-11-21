@@ -16,19 +16,19 @@ public class MListCommand implements MemberInterface {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		MemberDAO dao = new MemberDAO();
 		
-		// 1.페이징처리
+		// 페이징처리
 		int pag = request.getParameter("pag")==null ? 1 : Integer.parseInt(request.getParameter("pag"));
-		int pageSize = request.getParameter("pageSize")==null ? 3 : Integer.parseInt(request.getParameter("pageSize"));
-		int totRecCnt = dao.getTotRecCnt(99);
+		int pageSize = request.getParameter("pageSize")==null ? 5 : Integer.parseInt(request.getParameter("pageSize"));
+		int totRecCnt = dao.getTotRecCnt(999);
 		int totPage = (totRecCnt % pageSize)==0 ? (totRecCnt / pageSize) : (totRecCnt / pageSize) + 1 ;
 		int startIndexNo = (pag - 1) * pageSize;
 		int curScrStartNo = totRecCnt - startIndexNo;
-
+		
 		int blockSize = 3;
 		int curBlock = (pag - 1) / blockSize;
 		int lastBlock = (totPage - 1) / blockSize;
 		
-		ArrayList<MemberVO> vos = dao.getMemberList(startIndexNo, pageSize, 99);
+		ArrayList<MemberVO> vos = dao.getMemberList(startIndexNo, pageSize, 999);
 		
 		request.setAttribute("vos", vos);
 		request.setAttribute("pag", pag);
@@ -46,7 +46,7 @@ public class MListCommand implements MemberInterface {
 //		else if(level == 2) strLevel = "정회원";
 //		else if(level == 3) strLevel = "우수회원";
 //		else strLevel = "전체회원";
-		
+//		
 //		request.setAttribute("level", level);
 //		request.setAttribute("strLevel", strLevel);
 	}

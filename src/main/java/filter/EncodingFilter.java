@@ -14,13 +14,14 @@ public class EncodingFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-//		System.out.println("1. 이곳은 Filter 통과하기 전 입니다.");
+		// System.out.println("1.이곳은 Filter 통과하기 전 입니다.");
+		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
 		chain.doFilter(request, response);
 		
-//		System.out.println("2. 이곳은 Filter 통과 후 입니다.");
+		// System.out.println("2.이곳은 Filter 통과 후 입니다.");
 	}
 
 }

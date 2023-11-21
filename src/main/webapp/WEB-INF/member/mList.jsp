@@ -13,7 +13,7 @@
     
     function pageSizeCheck() {
     	let pageSize = $("#pageSize").val();
-    	location.href = "mList.mem?pag=${pag}&pageSize="+pageSize;
+    	location.href = "mList.mem?pageSize="+pageSize;
     }
   </script>
 </head>
@@ -22,7 +22,7 @@
 <p><br/></p>
 <div class="container">
   <h2 class="text-center">전체 회원 리스트</h2>
-  <table class="table">
+  <table class="table table-borderless m-0 p-0 text-right">
     <tr>
       <td>
         <div>
@@ -32,7 +32,7 @@
             <option value="10" ${pageSize == 10 ? "selected" : ""}>10</option>
             <option value="15" ${pageSize == 15 ? "selected" : ""}>15</option>
             <option value="20" ${pageSize == 20 ? "selected" : ""}>20</option>
-          </select>
+          </select> 건
         </div>
       </td>
     </tr>
@@ -46,7 +46,7 @@
       <th>성별</th>
       <th>공개여부</th>
       <th>오늘방문횟수</th>
-      <th>회원등급</th>
+      <!-- <th>회원등급</th> -->
     </tr>
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
@@ -59,11 +59,12 @@
           <c:if test="${vo.userInfor != '공개'}">비공개</c:if>
         </td>
          --%>
-        <c:if test="${vo.userInfor == '공개'}">
+        <c:if test="${vo.userInfor == '공개' || vo.mid == sMid || sLevel == 0}">
 	        <td>${vo.name}</td>
 	        <td>${vo.gender}</td>
 	        <td>${vo.userInfor}</td>
 	        <td>${vo.todayCnt}</td>
+	        <%-- 
 	        <td>
 	          <c:choose>
 	            <c:when test="${vo.level == 0}">관리자</c:when>
@@ -73,9 +74,10 @@
 	            <c:otherwise></c:otherwise>
 	          </c:choose>
 	        </td>
+	         --%>
         </c:if>
-        <c:if test="${vo.userInfor != '공개'}">
-          <td colspan="5">비공개</td>
+        <c:if test="${vo.userInfor != '공개' && vo.mid != sMid && sLevel != 0}">
+          <td colspan="4">비공개</td>
         </c:if>
       </tr>
       <c:set var="curScrStartNo" value="${curScrStartNo - 1}"/>

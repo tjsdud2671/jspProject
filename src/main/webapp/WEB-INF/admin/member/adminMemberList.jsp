@@ -48,14 +48,15 @@
     }
     
     // 탈퇴 신청회원 실제로 제거하기
-    function memberDeleteOk(idx) {
+    function memberDeleteOk(idx,photo) {
     	let ans = confirm("선택된 회원을 삭제하시겠습니까?");
     	if(!ans) return false;
     	
     	$.ajax({
     		url  : "memberDelelteOk.mem",
     		type : "post",
-    		data : {idx : idx},
+    		data : {idx : idx,
+    			photo : photo},
     		success:function() {
     			alert("회원 삭제 완료!!");
     			location.reload();
@@ -65,28 +66,46 @@
     		}
     	});
     }
+    
+    // 페이지 사이즈 지정하기
+    function pageSizeCheck() {
+    	let pageSize = $("#pageSize").val();
+    	location.href = "adminMemberList.ad?level=${level}&pageSize="+pageSize;
+    }
   </script>
 </head>
 <body>
 <p><br/></p>
 <div class="container">
   <h2 class="text-center">${strLevel} 리스트</h2>
-  <table class="table">
+  <table class="table table-borderless m-0 p-0">
     <tr>
       <td>
         <div>등급별검색
           <select name="levelItem" id="levelItem" onchange="levelItemCheck()">
-            <option value="99" ${level > 4 ? "selected" : ""}>전체검색</option>
+            <option value="999" ${level > 4  ? "selected" : ""}>전체검색</option>
             <option value="0"  ${level == 0 ? "selected" : ""}>관리자</option>
             <option value="1"  ${level == 1 ? "selected" : ""}>준회원</option>
             <option value="2"  ${level == 2 ? "selected" : ""}>정회원</option>
             <option value="3"  ${level == 3 ? "selected" : ""}>우수회원</option>
+            <option value="99"  ${level == 99 ? "selected" : ""}>탈퇴신청회원</option>
           </select>
+        </div>
+      </td>
+      <td class="text-right">
+        <div>
+          <select name="pageSize" id="pageSize" onchange="pageSizeCheck()">
+            <option value="3"  ${pageSize == 3  ? "selected" : ""}>3</option>
+            <option value="5"  ${pageSize == 5  ? "selected" : ""}>5</option>
+            <option value="10" ${pageSize == 10 ? "selected" : ""}>10</option>
+            <option value="15" ${pageSize == 15 ? "selected" : ""}>15</option>
+            <option value="20" ${pageSize == 20 ? "selected" : ""}>20</option>
+          </select> 건
         </div>
       </td>
     </tr>
   </table>
-  <table class="table table-hover">
+  <table class="table table-hover text-center">
     <tr class="table-dark text-dark">
       <th>번호</th>
       <th>아이디</th>
@@ -100,25 +119,26 @@
     <c:forEach var="vo" items="${vos}" varStatus="st">
       <tr>
         <td>${curScrStartNo}</td>
-        <%-- <td><a href="adminMemberInfor.ad?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&level=${level}">${vo.mid}</a></td> --%>
-        <td><a href="adminMemberInfor.ad?idx=${vo.idx}">${vo.mid}</a></td>
+        <td><a href="adminMemberInfor.ad?idx=${vo.idx}&pag=${pag}&pageSize=${pageSize}&level=${level}">${vo.mid}</a></td>
+        <%-- <td><a href="adminMemberInfor.ad?idx=${vo.idx}">${vo.mid}</a></td> --%>
         <td>${vo.nickName}</td>
         <td>${vo.name}</td>
         <td>${vo.userInfor}</td>
         <td>${vo.todayCnt}</td>
         <td>
           <c:if test="${vo.userDel == 'OK'}"><font color="red"><b>탈퇴신청</b></font>
-            <c:if test="${vo.deleteDiff >= 30}">(<a href="javascript:memberDeleteOk(${vo.idx})" title="30일경과">x</a>)</c:if>
+            <c:if test="${vo.deleteDiff >= 30}">(<a href="javascript:memberDeleteOk('${vo.idx}','${vo.photo}')" title="30일경과">x</a>)</c:if>
           </c:if>
           <c:if test="${vo.userDel != 'OK'}">활동중</c:if>
         </td>
         <td>
-          <form name="levelForm">
+          <form name="levelForm">	<!-- 등급변경하기 -->
             <select name="level" onchange="levelChange(this)">
               <option value="0/${vo.idx}" ${vo.level==0 ? "selected" : ""}>관리자</option>
               <option value="1/${vo.idx}" ${vo.level==1 ? "selected" : ""}>준회원</option>
               <option value="2/${vo.idx}" ${vo.level==2 ? "selected" : ""}>정회원</option>
               <option value="3/${vo.idx}" ${vo.level==3 ? "selected" : ""}>우수회원</option>
+              <option value="99/${vo.idx}" ${vo.level==99 ? "selected" : ""}>탈퇴신청회원</option>
             </select>
           </form>
         </td>

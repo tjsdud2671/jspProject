@@ -33,11 +33,11 @@ public class AjaxTest5 extends HttpServlet {
 		map.put("point", vo.getPoint()+"");
 		map.put("todayCount", vo.getTodayCount()+"");
 
-		System.out.println("map : " + map);
+		//System.out.println("map : " + map);
 		
 		// JSON형식의 자료로 변경처리한다. 라이브러리 주소 : https://code.google.com/archive/p/json-simple/downloads
 		JSONObject jObj = new JSONObject(map);
-		System.out.println("jObj : " + jObj);
+		//System.out.println("jObj : " + jObj);
 		
 		// 여러개의 vo객체를 보내고자 할때는 JSON배열로 담아서 처리한다.
 		JSONArray jArray = new JSONArray();
@@ -55,12 +55,6 @@ public class AjaxTest5 extends HttpServlet {
 		
 		System.out.println("jArray : " + jArray);
 		
-		
-		
-		// JSON객체를 문자열로 변경처리...
-		String str = jObj.toJSONString();
-		System.out.println("str : " + str);
-		
-		response.getWriter().write(str);
+		response.getWriter().write(jArray.toString());
 	}
 }
